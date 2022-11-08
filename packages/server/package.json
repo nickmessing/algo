@@ -8,13 +8,13 @@
     "generate:prisma": "prisma generate",
     "generate:graphql:codegen": "graphql-codegen --config codegen.yml",
     "generate:graphql:format": "eslint src/generated --ext .ts --fix",
-    "generate:graphql": "pnpm run generate:graphql:codegen && pnpm run generate:graphql:format",
-    "generate": "pnpm run generate:prisma && pnpm run generate:graphql",
+    "generate:graphql": "yarn generate:graphql:codegen && yarn generate:graphql:format",
+    "generate": "yarn generate:prisma && yarn generate:graphql",
     "type-check": "tsc --noEmit",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "dev:codegen": "nodemon --config nodemon.codegen.json",
     "dev:server": "nodemon --config nodemon.server.json",
-    "dev": "concurrently -n codegen,\" server\" -c bgMagenta,bgBlue \"pnpm:dev:codegen\" \"pnpm:dev:server\"",
+    "dev": "concurrently -n codegen,\" server\" -c bgMagenta,bgBlue \"yarn:dev:codegen\" \"yarn:dev:server\"",
     "build": "tsc && cp -r src/graphql dist"
   },
   "devDependencies": {
