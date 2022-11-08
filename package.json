@@ -8,15 +8,15 @@
     "packages/*"
   ],
   "scripts": {
-    "lint:server": "cd packages/server && pnpm run lint",
-    "lint:web": "cd packages/web && pnpm run lint",
-    "lint": "pnpm run lint:server && pnpm run lint:web",
-    "dev:server": "cd packages/server && pnpm run dev",
-    "dev:web": "cd packages/web && pnpm run dev",
-    "dev": "concurrently -p \"{name} :: {time}\" -n server,\"   web\" -c bgBlue,bgGreen \"pnpm run dev:server\" \"pnpm run dev:web\"",
-    "postinstall:server": "cd packages/server && pnpm run generate",
-    "postinstall:web": "cd packages/web && pnpm run generate",
-    "postinstall": "pnpm run postinstall:server && pnpm run postinstall:web"
+    "lint:server": "cd packages/server && yarn lint",
+    "lint:web": "cd packages/web && yarn lint",
+    "lint": "yarn lint:server && yarn lint:web",
+    "dev:server": "cd packages/server && yarn dev",
+    "dev:web": "cd packages/web && yarn dev",
+    "dev": "concurrently -p \"{name} :: {time}\" -n server,\"   web\" -c bgBlue,bgGreen \"yarn dev:server\" \"yarn dev:web\"",
+    "postinstall:server": "cd packages/server && yarn generate",
+    "postinstall:web": "cd packages/web && yarn generate",
+    "postinstall": "yarn postinstall:server && yarn postinstall:web"
   },
   "devDependencies": {
     "concurrently": "^7.5.0"
