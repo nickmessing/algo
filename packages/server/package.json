@@ -14,7 +14,8 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "dev:codegen": "nodemon --config nodemon.codegen.json",
     "dev:server": "nodemon --config nodemon.server.json",
-    "dev": "concurrently -n codegen,\" server\" -c bgMagenta,bgBlue \"pnpm:dev:codegen\" \"pnpm:dev:server\""
+    "dev": "concurrently -n codegen,\" server\" -c bgMagenta,bgBlue \"pnpm:dev:codegen\" \"pnpm:dev:server\"",
+    "build": "tsc && cp -r src/graphql dist"
   },
   "devDependencies": {
     "@algo/eslint-config-eslint": "*",
