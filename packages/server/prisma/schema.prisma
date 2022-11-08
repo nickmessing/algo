@@ -1,0 +1,157 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid()) @db.Char(36)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  googleId     String  @unique @db.VarChar(255)
+  email        String  @unique @db.VarChar(255)
+  name         String? @db.VarChar(255)
+  avatar       String? @db.VarChar(255)
+  googleAvatar String? @db.VarChar(255)
+
+  canCreateTasks         Boolean @default(false)
+  canEditUserPermissions Boolean @default(false)
+  canEditForeignTasks    Boolean @default(false)
+
+  createdTasks Task[]
+  attempts     Attempt[]
+}
+
+model Tag {
+  id        String   @id @default(uuid()) @db.Char(36)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name  String        @unique @db.VarChar(255)
+  tasks TagsOnTasks[]
+}
+
+model Task {
+  id        String   @id @default(uuid()) @db.Char(36)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  title       String  @db.VarChar(100)
+  isActive    Boolean @default(false)
+  description String  @db.Text
+  timeLimit   Int     @db.Int
+  memoryLimit Int     @db.Int
+
+  authorId String @db.Char(36)
+
+  author   User          @relation(fields: [authorId], references: [id])
+  tags     TagsOnTasks[]
+  examples Example[]
+  tests    Test[]
+  attempts Attempt[]
+}
+
+model Example {
+  id        String   @id @default(uuid()) @db.Char(36)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  input  String @db.Text
+  output String @db.Text
+
+  taskId String @db.Char(36)
+
+  task Task @relation(fields: [taskId], references: [id])
+}
+
+model Test {
+  id        String   @id @default(uuid()) @db.Char(36)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  input  String  @db.Text
+  output String? @db.Text
+
+  taskId String @db.Char(36)
+
+  task Task  @relation(fields: [taskId], references: [id])
+  runs Run[]
+}
+
+enum AttemptStatus {
+  Processing
+  Accepted
+  Error
+}
+
+model Attempt {
+  id        String   @id @default(uuid()) @db.Char(36)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  status     AttemptStatus @default(Processing)
+  code       String        @db.Text
+  languageId Int           @db.Int
+  isSolution Boolean       @default(false)
+
+  taskId String @db.Char(36)
+  userId String @db.Char(36)
+
+  task Task  @relation(fields: [taskId], references: [id])
+  user User  @relation(fields: [userId], references: [id])
+  runs Run[]
+}
+
+enum RunStatus {
+  Pending
+  InQueue
+  Processing
+  Accepted
+  WrongAnswer
+  TimeLimitExceeded
+  CompilationError
+  RuntimeErrorSigsegv
+  RuntimeErrorSigxfsz
+  RuntimeErrorSigfpe
+  RuntimeErrorSigabrt
+  RuntimeErrorNzec
+  RuntimeErrorOther
+  InternalError
+  ExecFormatError
+}
+
+model Run {
+  id        String   @id @default(uuid()) @db.Char(36)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  submissionToken String?   @db.VarChar(100)
+  status          RunStatus @default(Pending)
+  stdout          String?   @db.Text
+  stderr          String?   @db.Text
+  compile_output  String?   @db.Text
+  time            Int?      @db.Int
+  memory          Int?      @db.Int
+
+  attemptId String @db.Char(36)
+  testId    String @db.Char(36)
+
+  attempt Attempt @relation(fields: [attemptId], references: [id])
+  test    Test    @relation(fields: [testId], references: [id])
+}
+
+model TagsOnTasks {
+  task   Task   @relation(fields: [taskId], references: [id])
+  taskId String @db.Char(36)
+  tag    Tag    @relation(fields: [tagId], references: [id])
+  tagId  String @db.Char(36)
+
+  @@id([taskId, tagId])
+}

@@ -1,0 +1,27 @@
+{
+  "name": "algo",
+  "version": "1.0.0",
+  "author": "Nicolai Moraru <dot.nick.dot.messing@gmail.com>",
+  "license": "UNLICENSED",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "lint:server": "cd packages/server && pnpm run lint",
+    "lint:web": "cd packages/web && pnpm run lint",
+    "lint": "pnpm run lint:server && pnpm run lint:web",
+    "dev:server": "cd packages/server && pnpm run dev",
+    "dev:web": "cd packages/web && pnpm run dev",
+    "dev": "concurrently -p \"{name} :: {time}\" -n server,\"   web\" -c bgBlue,bgGreen \"pnpm run dev:server\" \"pnpm run dev:web\"",
+    "postinstall:server": "cd packages/server && pnpm run generate",
+    "postinstall:web": "cd packages/web && pnpm run generate",
+    "postinstall": "pnpm run postinstall:server && pnpm run postinstall:web"
+  },
+  "devDependencies": {
+    "concurrently": "^7.5.0"
+  },
+  "dependencies": {
+    "typescript": "^4.8.4"
+  }
+}

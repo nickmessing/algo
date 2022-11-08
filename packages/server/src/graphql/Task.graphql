@@ -1,0 +1,55 @@
+type Task implements BaseModel {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+
+  isActive: Boolean!
+  title: String!
+  description: String!
+  timeLimit: Int!
+  memoryLimit: Int!
+
+  usersAttemptedCount: Int!
+  usersSuccededCount: Int!
+  tags: [String!]!
+  author: User!
+  examples: [Example!]!
+  attempts(userId: String, pagination: Pagination): PaginatedAttemptList!
+  attempt(attemptId: ID!): Attempt!
+}
+
+input CreateTaskInput {
+  title: String!
+  tags: [String!]!
+  description: String!
+  timeLimit: Int!
+  memoryLimit: Int!
+  solutionSource: String!
+  languageId: Int!
+  inputs: [String!]!
+  examples: [CreateExampleInput!]!
+}
+
+input TaskListFilter {
+  search: String!
+  tags: [String!]!
+}
+
+type PaginatedTaskList implements PaginatedResult {
+  data: [Task!]!
+  total: Int!
+}
+
+type TaskMutation {
+  createAttempt(input: CreateAttemptInput!): Attempt!
+}
+
+type Query {
+  tasks(pagination: Pagination, filter: TaskListFilter!): PaginatedTaskList!
+  task(taskId: ID!): Task!
+}
+
+type Mutation {
+  task(taskId: ID!): TaskMutation!
+  createTask(input: CreateTaskInput!): Task!
+}

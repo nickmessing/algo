@@ -1,0 +1,30 @@
+enum RunStatus {
+  Pending
+  InQueue
+  Processing
+  Accepted
+  WrongAnswer
+  TimeLimitExceeded
+  CompilationError
+  RuntimeErrorSigsegv
+  RuntimeErrorSigxfsz
+  RuntimeErrorSigfpe
+  RuntimeErrorSigabrt
+  RuntimeErrorNzec
+  RuntimeErrorOther
+  InternalError
+  ExecFormatError
+}
+
+type Run implements BaseModel {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  status: RunStatus!
+  time: Int
+  memory: Int
+}
+
+type Subscription {
+  runUpdated(runId: ID!): Run!
+}

@@ -1,0 +1,12 @@
+type Example implements BaseModel {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  input: String!
+  output: String!
+}
+
+input CreateExampleInput {
+  input: String!
+  output: String!
+}

@@ -1,0 +1,19 @@
+{
+  "eslint.format.enable": true,
+  "eslint.workingDirectories": ["./packages/web", "./packages/server"],
+  "volar.completion.preferredAttrNameCase": "camel",
+  "volar.completion.preferredTagNameCase": "pascal",
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "vue"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "editor.formatOnSave": true,
+  "[vue]": {
+    "editor.formatOnSave": false
+  },
+  "[typescript]": {
+    "editor.formatOnSave": false
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "cSpell.words": ["composables", "VITE"]
+}

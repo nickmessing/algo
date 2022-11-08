@@ -1,0 +1,102 @@
+fragment BasicTask on Task {
+  id
+  title
+  createdAt
+  tags
+  usersAttemptedCount
+  usersSuccededCount
+  author {
+    id
+    name
+    email
+    avatar
+  }
+}
+
+fragment FullTask on Task {
+  ...BasicTask
+  description
+  timeLimit
+  memoryLimit
+  examples {
+    id
+    input
+    output
+  }
+  attempts {
+    total
+  }
+}
+
+fragment TaskAttempt on Attempt {
+  id
+  status
+  createdAt
+  languageId
+  user {
+    id
+    name
+    email
+    avatar
+  }
+}
+
+query SingleTask($taskId: ID!) {
+  task(taskId: $taskId) {
+    ...FullTask
+  }
+}
+
+query TaskAttempts($taskId: ID!, $pagination: Pagination!, $userId: String) {
+  task(taskId: $taskId) {
+    id
+    attempts(userId: $userId, pagination: $pagination) {
+      data {
+        ...TaskAttempt
+      }
+    }
+  }
+}
+
+query TaskAttemptsTotal($taskId: ID!, $userId: String) {
+  task(taskId: $taskId) {
+    id
+    attempts(userId: $userId) {
+      total
+    }
+  }
+}
+
+subscription TaskAttemptCreated($taskId: ID!) {
+  attemptCreated(taskId: $taskId) {
+    ...TaskAttempt
+  }
+}
+
+query TaskListTotal($filter: TaskListFilter!) {
+  tasks(filter: $filter) {
+    total
+  }
+}
+
+query TaskList($pagination: Pagination!, $filter: TaskListFilter!) {
+  tasks(pagination: $pagination, filter: $filter) {
+    data {
+      ...BasicTask
+    }
+  }
+}
+
+mutation CreateTask($input: CreateTaskInput!) {
+  createTask(input: $input) {
+    id
+  }
+}
+
+mutation CreateTaskAttempt($taskId: ID!, $input: CreateAttemptInput!) {
+  task(taskId: $taskId) {
+    createAttempt(input: $input) {
+      id
+    }
+  }
+}

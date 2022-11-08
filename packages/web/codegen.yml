@@ -1,0 +1,16 @@
+overwrite: true
+schema: '../server/src/graphql/*.graphql'
+documents:
+  - 'src/**/*.graphql'
+generates:
+  src/generated/graphql.ts:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-vue-apollo'
+    config:
+      scalars:
+        DateTime: string
+      vueCompositionApiImportFrom: vue
+      enumsAsConst: true
+      useTypeImports: true

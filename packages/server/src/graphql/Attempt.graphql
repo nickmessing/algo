@@ -1,0 +1,35 @@
+enum AttemptStatus {
+  Processing
+  Accepted
+  Error
+}
+
+type Attempt implements BaseModel {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  languageId: Int!
+  status: AttemptStatus!
+
+  user: User!
+  runs: [Run!]!
+}
+
+type PaginatedAttemptList implements PaginatedResult {
+  data: [Attempt!]!
+  total: Int!
+}
+
+input CreateAttemptInput {
+  languageId: Int!
+  sourceCode: String!
+}
+
+type Query {
+  attempt(attemptId: ID!): Attempt!
+}
+
+type Subscription {
+  attemptCreated(taskId: ID!): Attempt!
+  attemptUpdated(attemptId: ID!): Attempt!
+}

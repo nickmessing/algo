@@ -1,0 +1,27 @@
+query Me {
+  me {
+    id
+    name
+    email
+    avatar
+    canCreateTasks
+  }
+}
+
+query UsersSearch($query: String!) {
+  usersSearch(query: $query) {
+    id
+    name
+    email
+    avatar
+  }
+}
+
+query User($userId: ID!) {
+  user(userId: $userId) {
+    id
+    name
+    email
+    avatar
+  }
+}

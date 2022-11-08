@@ -1,0 +1,72 @@
+@import './reset.css';
+@import './base.css';
+
+html,
+body,
+#app {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: var(--font-family-base);
+  color: var(--color-text);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.page-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 16px 24px;
+  gap: 16px;
+}
+
+.shrink-0 {
+  flex-shrink: 0;
+}
+
+.task-description,
+.description-editor .ProseMirror {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 16px;
+  width: 100%;
+
+  p,
+  h3,
+  ul {
+    width: 100%;
+  }
+
+  h3 {
+    font-size: var(--font-size-heading);
+    line-height: 34px;
+  }
+
+  ul {
+    padding-left: 32px;
+    list-style: disc;
+  }
+
+  strong {
+    font-weight: 700;
+  }
+
+  u {
+    text-decoration: underline;
+  }
+
+  em {
+    font-style: italic;
+  }
+}
+
+.example-content,
+.example-field .ProseMirror {
+  font-family: var(--font-family-mono);
+}

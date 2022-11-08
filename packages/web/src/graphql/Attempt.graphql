@@ -1,0 +1,27 @@
+fragment RunBasic on Run {
+  id
+  status
+  time
+  memory
+}
+
+query AttemptRuns($attemptId: ID!) {
+  attempt(attemptId: $attemptId) {
+    id
+    runs {
+      ...RunBasic
+    }
+  }
+}
+
+subscription AttemptUpdated($attemptId: ID!) {
+  attemptUpdated(attemptId: $attemptId) {
+    ...TaskAttempt
+  }
+}
+
+subscription RunUpdated($runId: ID!) {
+  runUpdated(runId: $runId) {
+    ...RunBasic
+  }
+}

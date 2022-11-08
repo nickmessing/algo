@@ -1,0 +1,19 @@
+type User implements BaseModel {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  email: String!
+  avatar: String
+  name: String
+  canCreateTasks: Boolean!
+  canUpdateForeignTasks: Boolean!
+  canUpdateUsers: Boolean!
+  tasksAttemptedCount: Int!
+  tasksSolvedCount: Int!
+}
+
+type Query {
+  me: User
+  usersSearch(query: String!): [User!]!
+  user(userId: ID!): User!
+}

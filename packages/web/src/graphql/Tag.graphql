@@ -1,0 +1,3 @@
+query Tags($search: String!) {
+  tags(search: $search)
+}

@@ -1,0 +1,24 @@
+overwrite: true
+schema: './src/graphql/*.graphql'
+generates:
+  src/generated/graphql.ts:
+    plugins:
+      - add:
+          content: '/* eslint-disable @typescript-eslint/ban-types */'
+      - add:
+          content: '/* eslint-disable @typescript-eslint/no-explicit-any */'
+      - 'typescript'
+      - 'typescript-resolvers'
+    config:
+      scalars:
+        DateTime: Date
+      contextType: ../apollo/createContext#ApolloContext
+      allowParentTypeOverride: true
+      enumsAsConst: true
+      mappers:
+        User: "import('@prisma/client').User"
+        Task: "import('@prisma/client').Task"
+        Attempt: "import('@prisma/client').Attempt"
+        TaskMutation: "import('@prisma/client').Task"
+        PaginatedAttemptList: "import('../utils/apollo').PaginatedAttemptListContext"
+        PaginatedTaskList: "import('../utils/apollo').PaginatedTaskListContext"
