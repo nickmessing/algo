@@ -12,7 +12,7 @@ declare global {
       SPACES_BUCKET_PUBLIC_DOMAIN: string
       JUDGE_HOST: string
       JUDGE_KEY: string
-      DOMAIN_NAME: string
+      URL_PREFIX: string
     }
   }
 }

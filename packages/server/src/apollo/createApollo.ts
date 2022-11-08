@@ -77,7 +77,7 @@ export async function createApollo(prisma: PrismaClient) {
 
   app.use(bodyParser.json({ limit: '50mb' }))
 
-  app.put('/api/runs/:id/callback', (req, res) => {
+  app.put('/runs/:id/callback', (req, res) => {
     refreshRunSubmission(prisma, req.params.id).catch(e => console.error(e))
 
     res.send('OK')

@@ -89,7 +89,7 @@ export async function createRunSubmission(prisma: PrismaClient, run: Run) {
       expected_output: test.output,
       cpu_time_limit: attempt.task.timeLimit / 1000,
       memory_limit: attempt.task.memoryLimit / 1024,
-      callback_url: `https://${process.env.DOMAIN_NAME}/api/runs/${run.id}/callback`,
+      callback_url: `${process.env.URL_PREFIX}/runs/${run.id}/callback`,
     })
 
     await prisma.run.update({
