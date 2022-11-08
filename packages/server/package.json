@@ -17,7 +17,7 @@
     "dev": "concurrently -n codegen,\" server\" -c bgMagenta,bgBlue \"pnpm:dev:codegen\" \"pnpm:dev:server\""
   },
   "devDependencies": {
-    "@algo/eslint-config-eslint": "workspace:*",
+    "@algo/eslint-config-eslint": "*",
     "@graphql-codegen/add": "^3.2.1",
     "@graphql-codegen/cli": "^2.13.11",
     "@graphql-codegen/typescript": "^2.8.1",

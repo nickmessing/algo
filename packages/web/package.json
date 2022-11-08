@@ -40,7 +40,7 @@
     "zod": "^3.19.1"
   },
   "devDependencies": {
-    "@algo/eslint-config-eslint": "workspace:*",
+    "@algo/eslint-config-eslint": "*",
     "@graphql-codegen/cli": "^2.13.11",
     "@graphql-codegen/typescript": "^2.8.1",
     "@graphql-codegen/typescript-operations": "^2.5.6",
