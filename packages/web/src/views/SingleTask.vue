@@ -81,7 +81,7 @@ const upload = async () => {
         <TheTag>{{ result.task.memoryLimit / 1024 / 1024 }} MB</TheTag>
       </div>
 
-      <template v-if="resultMe?.me">
+      <template v-if="resultMe?.me && result.task.isActive">
         <div class="section-title">Încarcă soluție</div>
         <div class="attempt-upload">
           <div class="section">

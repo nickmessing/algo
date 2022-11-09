@@ -318,6 +318,7 @@ export type FullTaskFragment = {
   description: string
   timeLimit: number
   memoryLimit: number
+  isActive: boolean
   id: string
   title: string
   createdAt: string
@@ -349,6 +350,7 @@ export type SingleTaskQuery = {
     description: string
     timeLimit: number
     memoryLimit: number
+    isActive: boolean
     id: string
     title: string
     createdAt: string
@@ -518,6 +520,7 @@ export const FullTaskFragmentDoc = gql`
     description
     timeLimit
     memoryLimit
+    isActive
     examples {
       id
       input
