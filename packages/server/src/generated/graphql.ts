@@ -25,6 +25,7 @@ export type Attempt = BaseModel & {
   id: Scalars['ID']
   languageId: Scalars['Int']
   runs: Array<Run>
+  source?: Maybe<Scalars['String']>
   status: AttemptStatus
   updatedAt: Scalars['DateTime']
   user: User
@@ -392,6 +393,7 @@ export type AttemptResolvers<ContextType = ApolloContext, ParentType = Resolvers
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>
   languageId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
   runs?: Resolver<Array<ResolversTypes['Run']>, ParentType, ContextType>
+  source?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
   status?: Resolver<ResolversTypes['AttemptStatus'], ParentType, ContextType>
   updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>
   user?: Resolver<ResolversTypes['User'], ParentType, ContextType>

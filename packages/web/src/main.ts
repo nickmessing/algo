@@ -5,6 +5,7 @@ import { createApp, provide, h } from 'vue'
 import { apolloClient } from './apollo'
 import App from './App.vue'
 import './assets/main.scss'
+import './prism'
 import { router } from './router'
 
 const app = createApp({

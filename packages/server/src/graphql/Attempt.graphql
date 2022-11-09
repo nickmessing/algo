@@ -10,6 +10,7 @@ type Attempt implements BaseModel {
   updatedAt: DateTime!
   languageId: Int!
   status: AttemptStatus!
+  source: String
 
   user: User!
   runs: [Run!]!

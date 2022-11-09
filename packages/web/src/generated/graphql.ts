@@ -24,6 +24,7 @@ export type Attempt = BaseModel & {
   id: Scalars['ID']
   languageId: Scalars['Int']
   runs: Array<Run>
+  source?: Maybe<Scalars['String']>
   status: AttemptStatus
   updatedAt: Scalars['DateTime']
   user: User
@@ -283,6 +284,7 @@ export type AttemptUpdatedSubscription = {
     status: AttemptStatus
     createdAt: string
     languageId: number
+    source?: string | null
     user: { __typename?: 'User'; id: string; name?: string | null; email: string; avatar?: string | null }
   }
 }
@@ -336,6 +338,7 @@ export type TaskAttemptFragment = {
   status: AttemptStatus
   createdAt: string
   languageId: number
+  source?: string | null
   user: { __typename?: 'User'; id: string; name?: string | null; email: string; avatar?: string | null }
 }
 
@@ -382,6 +385,7 @@ export type TaskAttemptsQuery = {
         status: AttemptStatus
         createdAt: string
         languageId: number
+        source?: string | null
         user: { __typename?: 'User'; id: string; name?: string | null; email: string; avatar?: string | null }
       }>
     }
@@ -410,6 +414,7 @@ export type TaskAttemptCreatedSubscription = {
     status: AttemptStatus
     createdAt: string
     languageId: number
+    source?: string | null
     user: { __typename?: 'User'; id: string; name?: string | null; email: string; avatar?: string | null }
   }
 }
@@ -538,6 +543,7 @@ export const TaskAttemptFragmentDoc = gql`
     status
     createdAt
     languageId
+    source
     user {
       id
       name

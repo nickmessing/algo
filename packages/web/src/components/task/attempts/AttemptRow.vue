@@ -24,6 +24,7 @@ const props = defineProps<{
       status: true
       createdAt: true
       languageId: true
+      source: true
       user: {
         __typename: true
         avatar: true
