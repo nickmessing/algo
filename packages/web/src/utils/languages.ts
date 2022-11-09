@@ -25,7 +25,7 @@ export const languages: Language[] = [
     grammar: 'pascal',
   },
   {
-    extensions: ['rust'],
+    extensions: ['rs'],
     name: 'Rust (1.40.0)',
     languageId: 73,
     grammar: 'rust',
