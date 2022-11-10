@@ -16,7 +16,7 @@ const highlightedCode = computed(() => {
     return props.code
   }
 
-  return Prism.highlight(props.code, Prism.languages.pascal, 'pascal')
+  return Prism.highlight(props.code, Prism.languages[language.value.grammar], language.value.grammar)
 })
 </script>
 
