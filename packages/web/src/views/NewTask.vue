@@ -24,7 +24,7 @@ import type { FileWithContent } from '@/types/files'
 
 const router = useRouter()
 
-const { formData, visibleErrors, zodFieldErrors, parseResult, touch, touchAll } = useValidation(
+const { formData, visibleErrors, parseResult, touch, touchAll } = useValidation(
   z.object({
     title: z.string().min(1, 'Denumirea este necesară').max(100, 'Denumirea nu poate fi mai lungă de 100 de caractere'),
     tags: z
@@ -104,6 +104,14 @@ const { formData, visibleErrors, zodFieldErrors, parseResult, touch, touchAll } 
     source: null as null | FileWithContent,
   },
 )
+
+const isDisabled = computed(() => {
+  if (!visibleErrors.value) {
+    return false
+  }
+
+  return Object.values(visibleErrors.value).some(errors => (errors?.length ?? 0) > 0)
+})
 
 const selectedLanguage = computed(() => {
   if (formData.source == null) {
@@ -214,7 +222,7 @@ const onSubmit = async () => {
         <FileField class="grow" :isErrored="Boolean(visibleErrors?.source)" @change="setSource" />
         <TheTag v-if="selectedLanguage">{{ selectedLanguage.name }}</TheTag>
       </div>
-      <TheButton type="submit" :disabled="Boolean(zodFieldErrors)">
+      <TheButton type="submit" :disabled="isDisabled">
         Adaugă problema
         <IconLoadingSpinning v-if="isMutating" />
       </TheButton>
