@@ -1394,6 +1394,16 @@
     prosemirror-state "^1.4.1"
     prosemirror-view "^1.28.2"
 
+"@tiptap/extension-subscript@^2.0.0-beta.202":
+  version "2.0.0-beta.202"
+  resolved "https://registry.yarnpkg.com/@tiptap/extension-subscript/-/extension-subscript-2.0.0-beta.202.tgz#730e0181c5b8d623fb4674d568d5ef4f3bd986d5"
+  integrity sha512-s/90xjDJGlWxontzyL0howpdTEbnl5EyvIDDYdAwalnHOGkyfWq8JMxL3klnxUL+Rn10sjatHnEYaLS2A5tN+Q==
+
+"@tiptap/extension-superscript@^2.0.0-beta.202":
+  version "2.0.0-beta.202"
+  resolved "https://registry.yarnpkg.com/@tiptap/extension-superscript/-/extension-superscript-2.0.0-beta.202.tgz#d756fb63585f8214ce3a7e2333978f2fb68b1259"
+  integrity sha512-kDOc+Sf1N5LzKWDBrTYBWaQFG40z3dCt/ljIMDWJt3Vka8ahnH4kcXhW9eNZLeIWavoj+M+4th+CPSfMdAYJbg==
+
 "@tiptap/extension-text@2.0.0-beta.202":
   version "2.0.0-beta.202"
   resolved "https://registry.yarnpkg.com/@tiptap/extension-text/-/extension-text-2.0.0-beta.202.tgz#d0152f547572a14c4e0e88287acb2b0c311fef04"

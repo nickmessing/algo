@@ -64,6 +64,16 @@ body {
   em {
     font-style: italic;
   }
+
+  sub {
+    font-size: 0.8em;
+    vertical-align: sub;
+  }
+
+  sup {
+    font-size: 0.8em;
+    vertical-align: super;
+  }
 }
 
 .example-content,

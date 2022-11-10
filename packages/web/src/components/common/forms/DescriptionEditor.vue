@@ -7,6 +7,8 @@ import { Italic } from '@tiptap/extension-italic'
 import { ListItem } from '@tiptap/extension-list-item'
 import { Paragraph } from '@tiptap/extension-paragraph'
 import { Placeholder } from '@tiptap/extension-placeholder'
+import { Subscript } from '@tiptap/extension-subscript'
+import { Superscript } from '@tiptap/extension-superscript'
 import { Text } from '@tiptap/extension-text'
 import { Underline } from '@tiptap/extension-underline'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
@@ -15,6 +17,8 @@ import { watch } from 'vue'
 import IconFormatBold from '@/icons/IconFormatBold.vue'
 import IconFormatBulletedList from '@/icons/IconFormatBulletedList.vue'
 import IconFormatItalic from '@/icons/IconFormatItalic.vue'
+import IconFormatSubscript from '@/icons/IconFormatSubscript.vue'
+import IconFormatSuperscript from '@/icons/IconFormatSuperscript.vue'
 import IconFormatTitle from '@/icons/IconFormatTitle.vue'
 import IconFormatUnderline from '@/icons/IconFormatUnderline.vue'
 
@@ -45,6 +49,8 @@ const editor = useEditor({
     Bold,
     Italic,
     Underline,
+    Subscript,
+    Superscript,
   ],
   onUpdate({ editor }) {
     emit('update:modelValue', editor.getHTML())
@@ -90,6 +96,7 @@ watch(
       >
         <IconFormatBulletedList />
       </button>
+      <div class="separator" />
       <button
         class="icon"
         :class="{ active: editor.isActive('bold') }"
@@ -110,6 +117,23 @@ watch(
         @click.prevent="editor?.chain().focus().toggleUnderline().run()"
       >
         <IconFormatUnderline />
+      </button>
+      <div class="separator" />
+      <button
+        class="icon"
+        :class="{ active: editor.isActive('subscript') }"
+        :disabled="editor.isActive('superscript')"
+        @click.prevent="editor?.chain().focus().toggleSubscript().run()"
+      >
+        <IconFormatSubscript />
+      </button>
+      <button
+        class="icon"
+        :class="{ active: editor.isActive('superscript') }"
+        :disabled="editor.isActive('subscript')"
+        @click.prevent="editor?.chain().focus().toggleSuperscript().run()"
+      >
+        <IconFormatSuperscript />
       </button>
     </div>
     <EditorContent :editor="editor" />
@@ -154,6 +178,16 @@ watch(
       &.active {
         background: var(--color-border);
       }
+
+      &:disabled {
+        opacity: 0.5;
+      }
+    }
+
+    .separator {
+      height: 1px;
+      width: var(--icon-size);
+      background: var(--color-border);
     }
   }
 
