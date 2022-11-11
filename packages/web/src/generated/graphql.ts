@@ -105,6 +105,12 @@ export type PaginatedTaskList = PaginatedResult & {
   total: Scalars['Int']
 }
 
+export type PaginatedUserList = PaginatedResult & {
+  __typename?: 'PaginatedUserList'
+  data: Array<User>
+  total: Scalars['Int']
+}
+
 export type Pagination = {
   skip: Scalars['Int']
   take: Scalars['Int']
@@ -118,6 +124,7 @@ export type Query = {
   task: Task
   tasks: PaginatedTaskList
   user: User
+  users: PaginatedUserList
   usersSearch: Array<User>
 }
 
@@ -140,6 +147,11 @@ export type QueryTasksArgs = {
 
 export type QueryUserArgs = {
   userId: Scalars['ID']
+}
+
+export type QueryUsersArgs = {
+  filter: UserListFilter
+  pagination?: InputMaybe<Pagination>
 }
 
 export type QueryUsersSearchArgs = {
@@ -249,6 +261,11 @@ export type User = BaseModel & {
   tasksAttemptedCount: Scalars['Int']
   tasksSolvedCount: Scalars['Int']
   updatedAt: Scalars['DateTime']
+}
+
+export type UserListFilter = {
+  search: Scalars['String']
+  tags: Array<Scalars['String']>
 }
 
 export type RunBasicFragment = {

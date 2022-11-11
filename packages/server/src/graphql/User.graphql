@@ -12,8 +12,19 @@ type User implements BaseModel {
   tasksSolvedCount: Int!
 }
 
+input UserListFilter {
+  search: String!
+  tags: [String!]!
+}
+
+type PaginatedUserList implements PaginatedResult {
+  data: [User!]!
+  total: Int!
+}
+
 type Query {
   me: User
+  users(pagination: Pagination, filter: UserListFilter!): PaginatedUserList!
   usersSearch(query: String!): [User!]!
   user(userId: ID!): User!
 }

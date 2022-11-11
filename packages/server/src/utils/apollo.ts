@@ -1,6 +1,6 @@
 import { Task } from '@prisma/client'
 
-import { Pagination, TaskListFilter } from '../generated/graphql'
+import { Pagination, TaskListFilter, UserListFilter } from '../generated/graphql'
 
 export type PaginatedAttemptListContext = {
   task: Task
@@ -11,4 +11,9 @@ export type PaginatedAttemptListContext = {
 export type PaginatedTaskListContext = {
   pagination: Pagination | null | undefined
   filter: TaskListFilter
+}
+
+export type PaginatedUserListContext = {
+  pagination: Pagination | null | undefined
+  filter: UserListFilter
 }

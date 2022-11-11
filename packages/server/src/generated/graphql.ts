@@ -106,6 +106,12 @@ export type PaginatedTaskList = PaginatedResult & {
   total: Scalars['Int']
 }
 
+export type PaginatedUserList = PaginatedResult & {
+  __typename?: 'PaginatedUserList'
+  data: Array<User>
+  total: Scalars['Int']
+}
+
 export type Pagination = {
   skip: Scalars['Int']
   take: Scalars['Int']
@@ -119,6 +125,7 @@ export type Query = {
   task: Task
   tasks: PaginatedTaskList
   user: User
+  users: PaginatedUserList
   usersSearch: Array<User>
 }
 
@@ -141,6 +148,11 @@ export type QueryTasksArgs = {
 
 export type QueryUserArgs = {
   userId: Scalars['ID']
+}
+
+export type QueryUsersArgs = {
+  filter: UserListFilter
+  pagination?: InputMaybe<Pagination>
 }
 
 export type QueryUsersSearchArgs = {
@@ -252,6 +264,11 @@ export type User = BaseModel & {
   updatedAt: Scalars['DateTime']
 }
 
+export type UserListFilter = {
+  search: Scalars['String']
+  tags: Array<Scalars['String']>
+}
+
 export type ResolverTypeWrapper<T> = Promise<T> | T
 
 export type ResolverWithResolve<TResult, TParent, TContext, TArgs> = {
@@ -342,8 +359,12 @@ export type ResolversTypes = {
   Int: ResolverTypeWrapper<Scalars['Int']>
   Mutation: ResolverTypeWrapper<{}>
   PaginatedAttemptList: ResolverTypeWrapper<import('../utils/apollo').PaginatedAttemptListContext>
-  PaginatedResult: ResolversTypes['PaginatedAttemptList'] | ResolversTypes['PaginatedTaskList']
+  PaginatedResult:
+    | ResolversTypes['PaginatedAttemptList']
+    | ResolversTypes['PaginatedTaskList']
+    | ResolversTypes['PaginatedUserList']
   PaginatedTaskList: ResolverTypeWrapper<import('../utils/apollo').PaginatedTaskListContext>
+  PaginatedUserList: ResolverTypeWrapper<import('../utils/apollo').PaginatedUserListContext>
   Pagination: Pagination
   Query: ResolverTypeWrapper<{}>
   Run: ResolverTypeWrapper<Run>
@@ -354,6 +375,7 @@ export type ResolversTypes = {
   TaskListFilter: TaskListFilter
   TaskMutation: ResolverTypeWrapper<import('@prisma/client').Task>
   User: ResolverTypeWrapper<import('@prisma/client').User>
+  UserListFilter: UserListFilter
 }
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -375,8 +397,12 @@ export type ResolversParentTypes = {
   Int: Scalars['Int']
   Mutation: {}
   PaginatedAttemptList: import('../utils/apollo').PaginatedAttemptListContext
-  PaginatedResult: ResolversParentTypes['PaginatedAttemptList'] | ResolversParentTypes['PaginatedTaskList']
+  PaginatedResult:
+    | ResolversParentTypes['PaginatedAttemptList']
+    | ResolversParentTypes['PaginatedTaskList']
+    | ResolversParentTypes['PaginatedUserList']
   PaginatedTaskList: import('../utils/apollo').PaginatedTaskListContext
+  PaginatedUserList: import('../utils/apollo').PaginatedUserListContext
   Pagination: Pagination
   Query: {}
   Run: Run
@@ -386,6 +412,7 @@ export type ResolversParentTypes = {
   TaskListFilter: TaskListFilter
   TaskMutation: import('@prisma/client').Task
   User: import('@prisma/client').User
+  UserListFilter: UserListFilter
 }
 
 export type AttemptResolvers<ContextType = ApolloContext, ParentType = ResolversParentTypes['Attempt']> = {
@@ -438,7 +465,11 @@ export type PaginatedResultResolvers<
   ContextType = ApolloContext,
   ParentType = ResolversParentTypes['PaginatedResult'],
 > = {
-  __resolveType: TypeResolveFn<'PaginatedAttemptList' | 'PaginatedTaskList', ParentType, ContextType>
+  __resolveType: TypeResolveFn<
+    'PaginatedAttemptList' | 'PaginatedTaskList' | 'PaginatedUserList',
+    ParentType,
+    ContextType
+  >
   data?: Resolver<Array<ResolversTypes['BaseModel']>, ParentType, ContextType>
   total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
 }
@@ -448,6 +479,15 @@ export type PaginatedTaskListResolvers<
   ParentType = ResolversParentTypes['PaginatedTaskList'],
 > = {
   data?: Resolver<Array<ResolversTypes['Task']>, ParentType, ContextType>
+  total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
+}
+
+export type PaginatedUserListResolvers<
+  ContextType = ApolloContext,
+  ParentType = ResolversParentTypes['PaginatedUserList'],
+> = {
+  data?: Resolver<Array<ResolversTypes['User']>, ParentType, ContextType>
   total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
@@ -464,6 +504,12 @@ export type QueryResolvers<ContextType = ApolloContext, ParentType = ResolversPa
     RequireFields<QueryTasksArgs, 'filter'>
   >
   user?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryUserArgs, 'userId'>>
+  users?: Resolver<
+    ResolversTypes['PaginatedUserList'],
+    ParentType,
+    ContextType,
+    RequireFields<QueryUsersArgs, 'filter'>
+  >
   usersSearch?: Resolver<
     Array<ResolversTypes['User']>,
     ParentType,
@@ -559,6 +605,7 @@ export type Resolvers<ContextType = ApolloContext> = {
   PaginatedAttemptList?: PaginatedAttemptListResolvers<ContextType>
   PaginatedResult?: PaginatedResultResolvers<ContextType>
   PaginatedTaskList?: PaginatedTaskListResolvers<ContextType>
+  PaginatedUserList?: PaginatedUserListResolvers<ContextType>
   Query?: QueryResolvers<ContextType>
   Run?: RunResolvers<ContextType>
   Subscription?: SubscriptionResolvers<ContextType>

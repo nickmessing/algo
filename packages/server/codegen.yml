@@ -22,3 +22,4 @@ generates:
         TaskMutation: "import('@prisma/client').Task"
         PaginatedAttemptList: "import('../utils/apollo').PaginatedAttemptListContext"
         PaginatedTaskList: "import('../utils/apollo').PaginatedTaskListContext"
+        PaginatedUserList: "import('../utils/apollo').PaginatedUserListContext"

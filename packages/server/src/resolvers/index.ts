@@ -4,6 +4,7 @@ import { Attempt } from './Attempt'
 import { Mutation } from './Mutation'
 import { PaginatedAttemptList } from './PaginatedAttemptList'
 import { PaginatedTaskList } from './PaginatedTaskList'
+import { PaginatedUserList } from './PaginatedUserList'
 import { Query } from './Query'
 import { Subscription } from './Subscription'
 import { Task } from './Task'
@@ -14,9 +15,11 @@ export const resolvers: Resolvers = {
   Mutation,
   Subscription,
 
-  Attempt,
   PaginatedAttemptList,
   PaginatedTaskList,
+  PaginatedUserList,
+
+  Attempt,
   Task,
   TaskMutation,
 }

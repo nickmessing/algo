@@ -6,6 +6,7 @@ import { tags } from './tags'
 import { task } from './task'
 import { tasks } from './tasks'
 import { user } from './user'
+import { users } from './users'
 import { usersSearch } from './usersSearch'
 
 export const Query: QueryResolvers = {
@@ -16,4 +17,5 @@ export const Query: QueryResolvers = {
   user,
   attempt,
   tasks,
+  users,
 }
