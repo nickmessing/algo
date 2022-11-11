@@ -9,7 +9,7 @@ type User implements BaseModel {
   canUpdateForeignTasks: Boolean!
   canUpdateUsers: Boolean!
   tasksAttemptedCount: Int!
-  tasksSolvedCount: Int!
+  tasksSuccededCount: Int!
 }
 
 input UserListFilter {

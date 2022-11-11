@@ -259,7 +259,7 @@ export type User = BaseModel & {
   id: Scalars['ID']
   name?: Maybe<Scalars['String']>
   tasksAttemptedCount: Scalars['Int']
-  tasksSolvedCount: Scalars['Int']
+  tasksSuccededCount: Scalars['Int']
   updatedAt: Scalars['DateTime']
 }
 

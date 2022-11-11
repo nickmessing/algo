@@ -9,6 +9,7 @@ import { Query } from './Query'
 import { Subscription } from './Subscription'
 import { Task } from './Task'
 import { TaskMutation } from './TaskMutation'
+import { User } from './User'
 
 export const resolvers: Resolvers = {
   Query,
@@ -22,4 +23,5 @@ export const resolvers: Resolvers = {
   Attempt,
   Task,
   TaskMutation,
+  User,
 }

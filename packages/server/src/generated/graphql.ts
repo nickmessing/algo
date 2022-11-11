@@ -260,7 +260,7 @@ export type User = BaseModel & {
   id: Scalars['ID']
   name?: Maybe<Scalars['String']>
   tasksAttemptedCount: Scalars['Int']
-  tasksSolvedCount: Scalars['Int']
+  tasksSuccededCount: Scalars['Int']
   updatedAt: Scalars['DateTime']
 }
 
@@ -590,7 +590,7 @@ export type UserResolvers<ContextType = ApolloContext, ParentType = ResolversPar
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
   tasksAttemptedCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
-  tasksSolvedCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
+  tasksSuccededCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
   updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
