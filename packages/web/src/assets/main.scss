@@ -29,7 +29,8 @@ body {
 }
 
 .task-description,
-.description-editor .ProseMirror {
+.description-editor .ProseMirror,
+.markdown-body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -38,11 +39,13 @@ body {
   width: 100%;
 
   p,
+  h2,
   h3,
   ul {
     width: 100%;
   }
 
+  h2,
   h3 {
     font-size: var(--font-size-heading);
     line-height: 34px;

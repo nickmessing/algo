@@ -44,5 +44,10 @@ export const router = createRouter({
       name: 'privacy-policy',
       component: () => import('@/views/PrivacyPolicy.vue'),
     },
+    {
+      path: '/changelog',
+      name: 'changelog',
+      component: () => import('@/views/TheChangelog.vue'),
+    },
   ],
 })

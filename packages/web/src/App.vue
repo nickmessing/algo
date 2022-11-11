@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
 
+import TheFooter from '@/components/navbar/TheFooter.vue'
 import TheNavbar from '@/components/navbar/TheNavbar.vue'
 </script>
 
@@ -13,6 +14,9 @@ import TheNavbar from '@/components/navbar/TheNavbar.vue'
       <div class="content-wrapper">
         <RouterView />
       </div>
+    </div>
+    <div class="footer">
+      <TheFooter />
     </div>
   </div>
 </template>
@@ -27,6 +31,11 @@ import TheNavbar from '@/components/navbar/TheNavbar.vue'
   background: var(--color-background);
 
   > .navbar {
+    flex: 0 0 auto;
+    height: 55px;
+  }
+
+  > .footer {
     flex: 0 0 auto;
     height: 55px;
   }

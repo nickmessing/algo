@@ -6,7 +6,7 @@ import UserMenuSection from './UserMenuSection.vue'
 </script>
 
 <template>
-  <div class="navbar">
+  <div class="navbar-root">
     <div class="content">
       <div class="content-section">
         <RouterLink to="/" class="logo"> algo.nickmessing.com </RouterLink>
@@ -20,7 +20,7 @@ import UserMenuSection from './UserMenuSection.vue'
 </template>
 
 <style lang="scss" scoped>
-.navbar {
+.navbar-root {
   width: 100%;
   height: 100%;
   background: var(--color-background-block);
