@@ -485,6 +485,8 @@ export type BasicUserFragment = {
   name?: string | null
   email: string
   avatar?: string | null
+  tasksAttemptedCount: number
+  tasksSuccededCount: number
 }
 
 export type MeQueryVariables = Exact<{ [key: string]: never }>
@@ -534,7 +536,15 @@ export type UserListQuery = {
   __typename?: 'Query'
   users: {
     __typename?: 'PaginatedUserList'
-    data: Array<{ __typename?: 'User'; id: string; name?: string | null; email: string; avatar?: string | null }>
+    data: Array<{
+      __typename?: 'User'
+      id: string
+      name?: string | null
+      email: string
+      avatar?: string | null
+      tasksAttemptedCount: number
+      tasksSuccededCount: number
+    }>
   }
 }
 
@@ -601,6 +611,8 @@ export const BasicUserFragmentDoc = gql`
     name
     email
     avatar
+    tasksAttemptedCount
+    tasksSuccededCount
   }
 `
 export const AttemptRunsDocument = gql`

@@ -2,6 +2,7 @@
 import { useTimeAgo } from '@vueuse/core'
 import { computed } from 'vue'
 
+import { useSuccessRate } from '@/composables/useSuccessRate'
 import { messages } from '@/utils/timeagoLocalization'
 
 import IconSpeedometer from '../../icons/IconSpeedometer.vue'
@@ -31,13 +32,6 @@ const props = defineProps<{
   >
 }>()
 
-// HSL
-type HSL = [hue: number, saturation: number, lightness: number]
-const colorBlack = [0, 0, 0] as HSL
-const colorGreen = [122, 39, 49] as HSL
-const colorYellow = [54, 100, 62] as HSL
-const colorRed = [4, 90, 58] as HSL
-
 const timeAgo = useTimeAgo(() => props.task.createdAt, {
   messages,
 })
@@ -48,36 +42,7 @@ const successRate = computed(() => {
   return Math.round((props.task.usersSuccededCount / props.task.usersAttemptedCount) * 100)
 })
 
-const successRateColor = computed(() => {
-  if (typeof successRate.value !== 'number') {
-    return colorBlack
-  }
-
-  if (successRate.value === 100) {
-    return colorGreen
-  }
-  if (successRate.value > 50) {
-    return [
-      colorYellow[0] + (colorGreen[0] - colorYellow[0]) * ((successRate.value - 50) / 50),
-      colorYellow[1] + (colorGreen[1] - colorYellow[1]) * ((successRate.value - 50) / 50),
-      colorYellow[2] + (colorGreen[2] - colorYellow[2]) * ((successRate.value - 50) / 50),
-    ] as HSL
-  }
-  if (successRate.value === 50) {
-    return colorYellow
-  }
-  if (successRate.value > 0) {
-    return [
-      colorRed[0] + (colorYellow[0] - colorRed[0]) * (successRate.value / 50),
-      colorRed[1] + (colorYellow[1] - colorRed[1]) * (successRate.value / 50),
-      colorRed[2] + (colorYellow[2] - colorRed[2]) * (successRate.value / 50),
-    ] as HSL
-  }
-  return colorRed
-})
-const successRateColorString = computed(() => {
-  return `hsl(${successRateColor.value[0]}, ${successRateColor.value[1]}%, ${successRateColor.value[2]}%)`
-})
+const { successRateColorString } = useSuccessRate(successRate)
 </script>
 
 <template>

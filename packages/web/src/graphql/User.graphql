@@ -3,6 +3,8 @@ fragment BasicUser on User {
   name
   email
   avatar
+  tasksAttemptedCount
+  tasksSuccededCount
 }
 
 query Me {

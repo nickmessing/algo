@@ -46,8 +46,8 @@ watch(
 
 <template>
   <PageContainer v-for="user in result?.users.data" :key="user.id">
-    <RouterLink :to="`/users/${user.id}`" class="page-flex">
+    <div class="page-flex">
       <UserSummary :user="user" />
-    </RouterLink>
+    </div>
   </PageContainer>
 </template>
