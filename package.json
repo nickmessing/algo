@@ -16,12 +16,21 @@
     "dev": "concurrently -p \"{name} :: {time}\" -n server,\"   web\" -c bgBlue,bgGreen \"yarn dev:server\" \"yarn dev:web\"",
     "postinstall:server": "cd packages/server && yarn generate",
     "postinstall:web": "cd packages/web && yarn generate",
-    "postinstall": "yarn postinstall:server && yarn postinstall:web"
+    "postinstall.old": "yarn postinstall:server && yarn postinstall:web",
+    "changelog": "conventional-changelog -p algo -i CHANGELOG.md -s",
+    "version": "yarn changelog && git add CHANGELOG.md"
   },
   "devDependencies": {
-    "concurrently": "^7.5.0"
+    "concurrently": "^7.5.0",
+    "cz-conventional-changelog": "3.3.0"
   },
   "dependencies": {
+    "conventional-changelog-cli": "^2.2.2",
     "typescript": "^4.8.4"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
