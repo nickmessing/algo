@@ -266,7 +266,6 @@ export type User = BaseModel & {
 
 export type UserListFilter = {
   search: Scalars['String']
-  tags: Array<Scalars['String']>
 }
 
 export type ResolverTypeWrapper<T> = Promise<T> | T

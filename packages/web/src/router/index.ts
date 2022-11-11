@@ -18,7 +18,19 @@ export const router = createRouter({
         {
           path: 'tasks/:id',
           name: 'task',
-          component: () => import('../views/SingleTask.vue'),
+          component: () => import('@/views/SingleTask.vue'),
+        },
+      ],
+    },
+    {
+      path: '/users',
+      name: 'users',
+      component: RouterView,
+      children: [
+        {
+          path: '',
+          name: 'user-list',
+          component: () => import('@/views/UserList.vue'),
         },
       ],
     },

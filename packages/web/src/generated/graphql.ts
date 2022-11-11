@@ -265,7 +265,6 @@ export type User = BaseModel & {
 
 export type UserListFilter = {
   search: Scalars['String']
-  tags: Array<Scalars['String']>
 }
 
 export type RunBasicFragment = {
@@ -480,6 +479,14 @@ export type CreateTaskAttemptMutation = {
   task: { __typename?: 'TaskMutation'; createAttempt: { __typename?: 'Attempt'; id: string } }
 }
 
+export type BasicUserFragment = {
+  __typename?: 'User'
+  id: string
+  name?: string | null
+  email: string
+  avatar?: string | null
+}
+
 export type MeQueryVariables = Exact<{ [key: string]: never }>
 
 export type MeQuery = {
@@ -510,6 +517,25 @@ export type UserQueryVariables = Exact<{
 export type UserQuery = {
   __typename?: 'Query'
   user: { __typename?: 'User'; id: string; name?: string | null; email: string; avatar?: string | null }
+}
+
+export type UserListTotalQueryVariables = Exact<{
+  filter: UserListFilter
+}>
+
+export type UserListTotalQuery = { __typename?: 'Query'; users: { __typename?: 'PaginatedUserList'; total: number } }
+
+export type UserListQueryVariables = Exact<{
+  pagination: Pagination
+  filter: UserListFilter
+}>
+
+export type UserListQuery = {
+  __typename?: 'Query'
+  users: {
+    __typename?: 'PaginatedUserList'
+    data: Array<{ __typename?: 'User'; id: string; name?: string | null; email: string; avatar?: string | null }>
+  }
 }
 
 export const RunBasicFragmentDoc = gql`
@@ -567,6 +593,14 @@ export const TaskAttemptFragmentDoc = gql`
       email
       avatar
     }
+  }
+`
+export const BasicUserFragmentDoc = gql`
+  fragment BasicUser on User {
+    id
+    name
+    email
+    avatar
   }
 `
 export const AttemptRunsDocument = gql`
@@ -1361,3 +1395,117 @@ export function useUserLazyQuery(
   return VueApolloComposable.useLazyQuery<UserQuery, UserQueryVariables>(UserDocument, variables, options)
 }
 export type UserQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<UserQuery, UserQueryVariables>
+export const UserListTotalDocument = gql`
+  query UserListTotal($filter: UserListFilter!) {
+    users(filter: $filter) {
+      total
+    }
+  }
+`
+
+/**
+ * __useUserListTotalQuery__
+ *
+ * To run a query within a Vue component, call `useUserListTotalQuery` and pass it any options that fit your needs.
+ * When your component renders, `useUserListTotalQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param variables that will be passed into the query
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = useUserListTotalQuery({
+ *   filter: // value for 'filter'
+ * });
+ */
+export function useUserListTotalQuery(
+  variables:
+    | UserListTotalQueryVariables
+    | VueCompositionApi.Ref<UserListTotalQueryVariables>
+    | ReactiveFunction<UserListTotalQueryVariables>,
+  options:
+    | VueApolloComposable.UseQueryOptions<UserListTotalQuery, UserListTotalQueryVariables>
+    | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<UserListTotalQuery, UserListTotalQueryVariables>>
+    | ReactiveFunction<VueApolloComposable.UseQueryOptions<UserListTotalQuery, UserListTotalQueryVariables>> = {},
+) {
+  return VueApolloComposable.useQuery<UserListTotalQuery, UserListTotalQueryVariables>(
+    UserListTotalDocument,
+    variables,
+    options,
+  )
+}
+export function useUserListTotalLazyQuery(
+  variables:
+    | UserListTotalQueryVariables
+    | VueCompositionApi.Ref<UserListTotalQueryVariables>
+    | ReactiveFunction<UserListTotalQueryVariables>,
+  options:
+    | VueApolloComposable.UseQueryOptions<UserListTotalQuery, UserListTotalQueryVariables>
+    | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<UserListTotalQuery, UserListTotalQueryVariables>>
+    | ReactiveFunction<VueApolloComposable.UseQueryOptions<UserListTotalQuery, UserListTotalQueryVariables>> = {},
+) {
+  return VueApolloComposable.useLazyQuery<UserListTotalQuery, UserListTotalQueryVariables>(
+    UserListTotalDocument,
+    variables,
+    options,
+  )
+}
+export type UserListTotalQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<
+  UserListTotalQuery,
+  UserListTotalQueryVariables
+>
+export const UserListDocument = gql`
+  query UserList($pagination: Pagination!, $filter: UserListFilter!) {
+    users(pagination: $pagination, filter: $filter) {
+      data {
+        ...BasicUser
+      }
+    }
+  }
+  ${BasicUserFragmentDoc}
+`
+
+/**
+ * __useUserListQuery__
+ *
+ * To run a query within a Vue component, call `useUserListQuery` and pass it any options that fit your needs.
+ * When your component renders, `useUserListQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param variables that will be passed into the query
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = useUserListQuery({
+ *   pagination: // value for 'pagination'
+ *   filter: // value for 'filter'
+ * });
+ */
+export function useUserListQuery(
+  variables:
+    | UserListQueryVariables
+    | VueCompositionApi.Ref<UserListQueryVariables>
+    | ReactiveFunction<UserListQueryVariables>,
+  options:
+    | VueApolloComposable.UseQueryOptions<UserListQuery, UserListQueryVariables>
+    | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<UserListQuery, UserListQueryVariables>>
+    | ReactiveFunction<VueApolloComposable.UseQueryOptions<UserListQuery, UserListQueryVariables>> = {},
+) {
+  return VueApolloComposable.useQuery<UserListQuery, UserListQueryVariables>(UserListDocument, variables, options)
+}
+export function useUserListLazyQuery(
+  variables:
+    | UserListQueryVariables
+    | VueCompositionApi.Ref<UserListQueryVariables>
+    | ReactiveFunction<UserListQueryVariables>,
+  options:
+    | VueApolloComposable.UseQueryOptions<UserListQuery, UserListQueryVariables>
+    | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<UserListQuery, UserListQueryVariables>>
+    | ReactiveFunction<VueApolloComposable.UseQueryOptions<UserListQuery, UserListQueryVariables>> = {},
+) {
+  return VueApolloComposable.useLazyQuery<UserListQuery, UserListQueryVariables>(UserListDocument, variables, options)
+}
+export type UserListQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<
+  UserListQuery,
+  UserListQueryVariables
+>

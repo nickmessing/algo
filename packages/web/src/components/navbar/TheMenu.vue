@@ -8,8 +8,9 @@ const { isAuthenticated, logOut, result } = useMe()
   <div class="menu">
     <RouterLink to="/">Probleme</RouterLink>
     <RouterLink v-if="result?.me?.canCreateTasks" to="/new-task">Adăugare problemă</RouterLink>
-    <span v-if="isAuthenticated" @click="logOut">Ieșire</span>
+    <RouterLink to="/users">Utilizatori</RouterLink>
     <RouterLink to="/privacy-policy">Politica de Confidențialitate</RouterLink>
+    <span v-if="isAuthenticated" @click="logOut">Ieșire</span>
   </div>
 </template>
 
