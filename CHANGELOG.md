@@ -2,6 +2,23 @@
 
 * fix(core): repară scriptul de postinstall ([d6aedd8](https://github.com/nickmessing/algo/commit/d6aedd8))
 * fix(server): implementează ștergere în cascadă ([c05d574](https://github.com/nickmessing/algo/commit/c05d574))
+
+
+
+## <small>1.0.1 (2022-11-11)</small>
+
+* feat(server): adaugă abilitatea de a interoga num probleme încercate și rezolvate la utilizator ([284147c](https://github.com/nickmessing/algo/commit/284147c))
+* feat(server): adaugă interogare de listă a utilizatorilor ([8c7d03d](https://github.com/nickmessing/algo/commit/8c7d03d))
+* feat(web): adaugă meniu jos cu link la jurnalul de modificări ([e799433](https://github.com/nickmessing/algo/commit/e799433))
+* feat(web): adaugă rata de succes la detaliile utilizatorului ([0c1b139](https://github.com/nickmessing/algo/commit/0c1b139))
+* feat(web): implementează lista utilizatorilor ([876e440](https://github.com/nickmessing/algo/commit/876e440))
+* chore(changelog): adaugă CHANGELOG ([dc349cc](https://github.com/nickmessing/algo/commit/dc349cc))
+* chore(changelog): adaugă commitizen pentru mesaje de commit standartizate ([075f040](https://github.com/nickmessing/algo/commit/075f040))
+
+
+
+## 1.0.0 (2022-11-11)
+
 * Add build ([af40368](https://github.com/nickmessing/algo/commit/af40368))
 * Add code if task solved ([492a253](https://github.com/nickmessing/algo/commit/492a253))
 * Add db 0 to redis ([ed9c000](https://github.com/nickmessing/algo/commit/ed9c000))
@@ -21,26 +38,3 @@
 * use https to load font ([3e4b437](https://github.com/nickmessing/algo/commit/3e4b437))
 * use PORT variable ([8920156](https://github.com/nickmessing/algo/commit/8920156))
 * v1.0.1 ([a83e183](https://github.com/nickmessing/algo/commit/a83e183))
-* feat(server): adaugă abilitatea de a interoga num probleme încercate și rezolvate la utilizator ([284147c](https://github.com/nickmessing/algo/commit/284147c))
-* feat(server): adaugă interogare de listă a utilizatorilor ([8c7d03d](https://github.com/nickmessing/algo/commit/8c7d03d))
-* feat(web): adaugă meniu jos cu link la jurnalul de modificări ([e799433](https://github.com/nickmessing/algo/commit/e799433))
-* feat(web): adaugă rata de succes la detaliile utilizatorului ([0c1b139](https://github.com/nickmessing/algo/commit/0c1b139))
-* feat(web): implementează lista utilizatorilor ([876e440](https://github.com/nickmessing/algo/commit/876e440))
-* chore(changelog): adaugă CHANGELOG ([dc349cc](https://github.com/nickmessing/algo/commit/dc349cc))
-* chore(changelog): adaugă commitizen pentru mesaje de commit standartizate ([075f040](https://github.com/nickmessing/algo/commit/075f040))
-
-
-
-## <small>1.0.1 (2022-11-11)</small>
-
-* feat(server): adaugă abilitatea de a interoga num probleme încercate și rezolvate la utilizator ([284147c](https://github.com/nickmessing/algo/commit/284147c))
-* feat(server): adaugă interogare de listă a utilizatorilor ([8c7d03d](https://github.com/nickmessing/algo/commit/8c7d03d))
-* feat(web): adaugă meniu jos cu link la jurnalul de modificări ([e799433](https://github.com/nickmessing/algo/commit/e799433))
-* feat(web): adaugă rata de succes la detaliile utilizatorului ([0c1b139](https://github.com/nickmessing/algo/commit/0c1b139))
-* feat(web): implementează lista utilizatorilor ([876e440](https://github.com/nickmessing/algo/commit/876e440))
-* chore(changelog): adaugă CHANGELOG ([dc349cc](https://github.com/nickmessing/algo/commit/dc349cc))
-* chore(changelog): adaugă commitizen pentru mesaje de commit standartizate ([075f040](https://github.com/nickmessing/algo/commit/075f040))
-
-
-
-## 1.0.0 (2022-11-11)
