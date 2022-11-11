@@ -51,7 +51,7 @@ model Task {
 
   authorId String @db.Char(36)
 
-  author   User          @relation(fields: [authorId], references: [id])
+  author   User          @relation(fields: [authorId], references: [id], onDelete: Cascade)
   tags     TagsOnTasks[]
   examples Example[]
   tests    Test[]
@@ -68,7 +68,7 @@ model Example {
 
   taskId String @db.Char(36)
 
-  task Task @relation(fields: [taskId], references: [id])
+  task Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
 }
 
 model Test {
@@ -81,7 +81,7 @@ model Test {
 
   taskId String @db.Char(36)
 
-  task Task  @relation(fields: [taskId], references: [id])
+  task Task  @relation(fields: [taskId], references: [id], onDelete: Cascade)
   runs Run[]
 }
 
@@ -104,8 +104,8 @@ model Attempt {
   taskId String @db.Char(36)
   userId String @db.Char(36)
 
-  task Task  @relation(fields: [taskId], references: [id])
-  user User  @relation(fields: [userId], references: [id])
+  task Task  @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  user User  @relation(fields: [userId], references: [id], onDelete: Cascade)
   runs Run[]
 }
 
@@ -143,14 +143,14 @@ model Run {
   attemptId String @db.Char(36)
   testId    String @db.Char(36)
 
-  attempt Attempt @relation(fields: [attemptId], references: [id])
-  test    Test    @relation(fields: [testId], references: [id])
+  attempt Attempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  test    Test    @relation(fields: [testId], references: [id], onDelete: Cascade)
 }
 
 model TagsOnTasks {
-  task   Task   @relation(fields: [taskId], references: [id])
+  task   Task   @relation(fields: [taskId], references: [id], onDelete: Cascade)
   taskId String @db.Char(36)
-  tag    Tag    @relation(fields: [tagId], references: [id])
+  tag    Tag    @relation(fields: [tagId], references: [id], onDelete: Cascade)
   tagId  String @db.Char(36)
 
   @@id([taskId, tagId])
