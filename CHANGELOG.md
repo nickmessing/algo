@@ -1,3 +1,11 @@
+## <small>1.0.6 (2022-11-12)</small>
+
+* chore(web): refactor la editor ([bb81ebe](https://github.com/nickmessing/algo/commit/bb81ebe))
+* feat(web): adaugă funcțional de cod în editorul vizual ([1c0e70b](https://github.com/nickmessing/algo/commit/1c0e70b))
+* feat(web): adaugă undo și redo în editor ([feb3e75](https://github.com/nickmessing/algo/commit/feb3e75))
+
+
+
 ## <small>1.0.5 (2022-11-12)</small>
 
 * chore(core): înnoiește dependențele ([a50c594](https://github.com/nickmessing/algo/commit/a50c594))
