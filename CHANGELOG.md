@@ -1,3 +1,9 @@
+## <small>1.0.5 (2022-11-12)</small>
+
+* chore(core): înnoiește dependențele ([a50c594](https://github.com/nickmessing/algo/commit/a50c594))
+
+
+
 ## <small>1.0.4 (2022-11-12)</small>
 
 * feat(db): adaugă limita de memorie pentru stivă ([94239e4](https://github.com/nickmessing/algo/commit/94239e4))
