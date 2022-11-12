@@ -16,6 +16,7 @@ const schema = z.object({
     .min(1),
   inputs: z.array(z.string().min(1).max(60_000)).min(1),
   memoryLimit: z.number().int().min(1),
+  stackMemoryLimit: z.number().int().min(1),
   solutionSource: z.string().min(1).max(60_000),
   tags: z.array(z.string().min(1).max(30)).min(1),
   timeLimit: z.number().int().min(1),
@@ -37,7 +38,18 @@ export const createTask: MutationResolvers['createTask'] = async (parent, { inpu
     throw new UserInputError('Invalid input')
   }
 
-  const { languageId, description, examples, inputs, memoryLimit, solutionSource, tags, timeLimit, title } = parsed.data
+  const {
+    languageId,
+    description,
+    examples,
+    inputs,
+    memoryLimit,
+    stackMemoryLimit,
+    solutionSource,
+    tags,
+    timeLimit,
+    title,
+  } = parsed.data
 
   const task = await prisma.task.create({
     data: {
@@ -45,6 +57,7 @@ export const createTask: MutationResolvers['createTask'] = async (parent, { inpu
       description,
       timeLimit,
       memoryLimit,
+      stackMemoryLimit,
       authorId: user.id,
       examples: {
         create: examples.map(({ input, output }) => ({
