@@ -77,8 +77,9 @@ const upload = async () => {
 
       <div class="section-title">
         <div>Limite</div>
-        <TheTag>{{ result.task.timeLimit / 1000 }} s</TheTag>
-        <TheTag>{{ result.task.memoryLimit / 1024 / 1024 }} MB</TheTag>
+        <TheTag>Timp limită: {{ result.task.timeLimit / 1000 }} s</TheTag>
+        <TheTag>Memorie limită (total): {{ result.task.memoryLimit / 1024 / 1024 }} MB</TheTag>
+        <TheTag>Memorie limită (stivă): {{ result.task.stackMemoryLimit / 1024 / 1024 }} MB</TheTag>
       </div>
 
       <template v-if="resultMe?.me && result.task.isActive">

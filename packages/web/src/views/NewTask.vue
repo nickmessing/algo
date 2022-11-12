@@ -60,6 +60,10 @@ const { formData, visibleErrors, parseResult, touch, touchAll } = useValidation(
       .string()
       .regex(/^\d{1,}$/, 'Limita de memorie trebuie să fie un număr întreg')
       .refine(value => Number(value) >= 2, 'Limita de memorie trebuie să fie cel puțin 2 MB'),
+    stackMemoryLimit: z
+      .string()
+      .regex(/^\d{1,}$/, 'Limita de stivă trebuie să fie un număr întreg')
+      .refine(value => Number(value) >= 2, 'Limita de stivă trebuie să fie cel puțin 2 MB'),
     inputs: z
       .array(
         z.object({
@@ -100,6 +104,7 @@ const { formData, visibleErrors, parseResult, touch, touchAll } = useValidation(
     examples: [{ input: '', output: '' }],
     timeLimit: '',
     memoryLimit: '',
+    stackMemoryLimit: '',
     inputs: [] as FileWithContent[],
     source: null as null | FileWithContent,
   },
@@ -153,6 +158,7 @@ const onSubmit = async () => {
       examples: data.examples,
       timeLimit: Math.round(Number(data.timeLimit) * 1000),
       memoryLimit: Number(data.memoryLimit) * 1024 * 1024,
+      stackMemoryLimit: Number(data.stackMemoryLimit) * 1024 * 1024,
       inputs: data.inputs.map(input => input.content),
       languageId: selectedLanguage.value.languageId,
       solutionSource: data.source.content,
@@ -200,15 +206,23 @@ const onSubmit = async () => {
 
       <TheAlert v-if="visibleErrors?.timeLimit" type="error" :message="visibleErrors.timeLimit" />
       <TheAlert v-if="visibleErrors?.memoryLimit" type="error" :message="visibleErrors.memoryLimit" />
+      <TheAlert v-if="visibleErrors?.stackMemoryLimit" type="error" :message="visibleErrors.stackMemoryLimit" />
       <div class="section-title">
         <div>Limite</div>
         <TheTag class="limit-editor" :isErrored="Boolean(visibleErrors?.timeLimit)">
+          <div>Timp limită:</div>
           <EditableText v-model="formData.timeLimit" placeholder="0.1" @blur="touch('timeLimit')" />
-          <div class="unit">s</div>
+          <div>s</div>
         </TheTag>
         <TheTag class="limit-editor" :isErrored="Boolean(visibleErrors?.memoryLimit)">
+          <div>Memorie limită (total):</div>
           <EditableText v-model="formData.memoryLimit" placeholder="128" @blur="touch('memoryLimit')" />
-          <div class="unit">MB</div>
+          <div>MB</div>
+        </TheTag>
+        <TheTag class="limit-editor" :isErrored="Boolean(visibleErrors?.stackMemoryLimit)">
+          <div>Memorie limită (stivă):</div>
+          <EditableText v-model="formData.stackMemoryLimit" placeholder="128" @blur="touch('stackMemoryLimit')" />
+          <div>MB</div>
         </TheTag>
       </div>
 
