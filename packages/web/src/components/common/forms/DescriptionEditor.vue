@@ -14,8 +14,8 @@ import { Subscript } from '@tiptap/extension-subscript'
 import { Superscript } from '@tiptap/extension-superscript'
 import { Text } from '@tiptap/extension-text'
 import { Underline } from '@tiptap/extension-underline'
-import { useEditor, EditorContent } from '@tiptap/vue-3'
-import { watch } from 'vue'
+import { useEditor, EditorContent, type Editor } from '@tiptap/vue-3'
+import { watch, type Component } from 'vue'
 
 import IconFormatBold from '@/icons/IconFormatBold.vue'
 import IconFormatBulletedList from '@/icons/IconFormatBulletedList.vue'
@@ -75,6 +75,94 @@ const editor = useEditor({
   },
 })
 
+type NodeSeparator = {
+  type: 'separator'
+}
+type NodeButton = {
+  type: 'button'
+  icon: Component
+  isActive?: (editor: Editor) => boolean
+  isDisabled?: (editor: Editor) => boolean
+  action: () => void
+}
+
+type Node = NodeSeparator | NodeButton
+
+const nodes: Node[] = [
+  {
+    type: 'button',
+    icon: IconFormatTitle,
+    isActive: editor => editor.isActive('heading', { level: 3 }),
+    action: () => editor.value?.chain().focus().toggleHeading({ level: 3 }).run(),
+  },
+  {
+    type: 'button',
+    icon: IconFormatBold,
+    isActive: editor => editor.isActive('bold'),
+    action: () => editor.value?.chain().focus().toggleBold().run(),
+  },
+  {
+    type: 'button',
+    icon: IconFormatItalic,
+    isActive: editor => editor.isActive('italic'),
+    action: () => editor.value?.chain().focus().toggleItalic().run(),
+  },
+  {
+    type: 'button',
+    icon: IconFormatUnderline,
+    isActive: editor => editor.isActive('underline'),
+    action: () => editor.value?.chain().focus().toggleUnderline().run(),
+  },
+  {
+    type: 'button',
+    icon: IconFormatSubscript,
+    isActive: editor => editor.isActive('subscript'),
+    action: () => editor.value?.chain().focus().toggleSubscript().run(),
+  },
+  {
+    type: 'button',
+    icon: IconFormatSuperscript,
+    isActive: editor => editor.isActive('superscript'),
+    action: () => editor.value?.chain().focus().toggleSuperscript().run(),
+  },
+  {
+    type: 'separator',
+  },
+  {
+    type: 'button',
+    icon: IconFormatBulletedList,
+    isActive: editor => editor.isActive('bulletList'),
+    action: () => editor.value?.chain().focus().toggleBulletList().run(),
+  },
+  {
+    type: 'button',
+    icon: IconFormatCode,
+    isActive: editor => editor.isActive('code'),
+    action: () => editor.value?.chain().focus().toggleCode().run(),
+  },
+  {
+    type: 'button',
+    icon: IconFormatCodeBlock,
+    isActive: editor => editor.isActive('codeBlock'),
+    action: () => editor.value?.chain().focus().toggleCodeBlock().run(),
+  },
+  {
+    type: 'separator',
+  },
+  {
+    type: 'button',
+    icon: IconUndo,
+    isDisabled: editor => !editor.can().undo(),
+    action: () => editor.value?.chain().focus().undo().run(),
+  },
+  {
+    type: 'button',
+    icon: IconRedo,
+    isDisabled: editor => !editor.can().redo(),
+    action: () => editor.value?.chain().focus().redo().run(),
+  },
+]
+
 watch(
   () => props.modelValue,
   value => {
@@ -92,81 +180,18 @@ watch(
 <template>
   <div class="description-editor" :class="{ errored: props.isErrored }">
     <div v-if="editor" class="format-icons">
-      <button
-        class="icon"
-        :class="{ active: editor.isActive('heading', { level: 3 }) }"
-        @click.prevent="editor?.chain().focus().toggleHeading({ level: 3 }).run()"
-      >
-        <IconFormatTitle />
-      </button>
-      <button
-        class="icon"
-        :class="{ active: editor.isActive('bulletList') }"
-        @click.prevent="editor?.chain().focus().toggleBulletList().run()"
-      >
-        <IconFormatBulletedList />
-      </button>
-      <div class="separator" />
-      <button
-        class="icon"
-        :class="{ active: editor.isActive('bold') }"
-        @click.prevent="editor?.chain().focus().toggleBold().run()"
-      >
-        <IconFormatBold />
-      </button>
-      <button
-        class="icon"
-        :class="{ active: editor.isActive('italic') }"
-        @click.prevent="editor?.chain().focus().toggleItalic().run()"
-      >
-        <IconFormatItalic />
-      </button>
-      <button
-        class="icon"
-        :class="{ active: editor.isActive('underline') }"
-        @click.prevent="editor?.chain().focus().toggleUnderline().run()"
-      >
-        <IconFormatUnderline />
-      </button>
-      <div class="separator" />
-      <button
-        class="icon"
-        :class="{ active: editor.isActive('subscript') }"
-        :disabled="editor.isActive('superscript')"
-        @click.prevent="editor?.chain().focus().toggleSubscript().run()"
-      >
-        <IconFormatSubscript />
-      </button>
-      <button
-        class="icon"
-        :class="{ active: editor.isActive('superscript') }"
-        :disabled="editor.isActive('subscript')"
-        @click.prevent="editor?.chain().focus().toggleSuperscript().run()"
-      >
-        <IconFormatSuperscript />
-      </button>
-      <div class="separator" />
-      <button
-        class="icon"
-        :class="{ active: editor.isActive('code') }"
-        @click.prevent="editor?.chain().focus().toggleCode().run()"
-      >
-        <IconFormatCode />
-      </button>
-      <button
-        class="icon"
-        :class="{ active: editor.isActive('codeBlock') }"
-        @click.prevent="editor?.chain().focus().toggleCodeBlock().run()"
-      >
-        <IconFormatCodeBlock />
-      </button>
-      <div class="separator" />
-      <button class="icon" :disabled="!editor.can().undo()" @click.prevent="editor?.chain().focus().undo().run()">
-        <IconUndo />
-      </button>
-      <button class="icon" :disabled="!editor.can().redo()" @click.prevent="editor?.chain().focus().redo().run()">
-        <IconRedo />
-      </button>
+      <template v-for="(node, index) in nodes" :key="index">
+        <div v-if="node.type === 'separator'" class="separator" />
+        <button
+          v-else
+          class="icon"
+          :class="{ active: node.isActive?.(editor) }"
+          :disabled="node.isDisabled?.(editor)"
+          @click.prevent="node.action()"
+        >
+          <Component :is="node.icon" />
+        </button>
+      </template>
     </div>
     <EditorContent :editor="editor" />
   </div>
