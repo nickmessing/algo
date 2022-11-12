@@ -8,6 +8,7 @@ type Task implements BaseModel {
   description: String!
   timeLimit: Int!
   memoryLimit: Int!
+  stackMemoryLimit: Int!
 
   usersAttemptedCount: Int!
   usersSuccededCount: Int!
@@ -24,6 +25,7 @@ input CreateTaskInput {
   description: String!
   timeLimit: Int!
   memoryLimit: Int!
+  stackMemoryLimit: Int
   solutionSource: String!
   languageId: Int!
   inputs: [String!]!
