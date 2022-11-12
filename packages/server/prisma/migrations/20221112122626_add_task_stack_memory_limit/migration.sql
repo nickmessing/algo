@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `Task` ADD COLUMN `stackMemoryLimit` INTEGER NOT NULL DEFAULT 67108864;

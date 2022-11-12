@@ -43,11 +43,12 @@ model Task {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  title       String  @db.VarChar(100)
-  isActive    Boolean @default(false)
-  description String  @db.Text
-  timeLimit   Int     @db.Int
-  memoryLimit Int     @db.Int
+  title            String  @db.VarChar(100)
+  isActive         Boolean @default(false)
+  description      String  @db.Text
+  timeLimit        Int     @db.Int
+  memoryLimit      Int     @db.Int
+  stackMemoryLimit Int     @default(67108864) @db.Int
 
   authorId String @db.Char(36)
 
