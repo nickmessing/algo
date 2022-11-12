@@ -5,6 +5,7 @@ import { Code } from '@tiptap/extension-code'
 import { CodeBlock } from '@tiptap/extension-code-block'
 import { Document } from '@tiptap/extension-document'
 import { Heading } from '@tiptap/extension-heading'
+import { History } from '@tiptap/extension-history'
 import { Italic } from '@tiptap/extension-italic'
 import { ListItem } from '@tiptap/extension-list-item'
 import { Paragraph } from '@tiptap/extension-paragraph'
@@ -25,6 +26,8 @@ import IconFormatSubscript from '@/icons/IconFormatSubscript.vue'
 import IconFormatSuperscript from '@/icons/IconFormatSuperscript.vue'
 import IconFormatTitle from '@/icons/IconFormatTitle.vue'
 import IconFormatUnderline from '@/icons/IconFormatUnderline.vue'
+import IconRedo from '@/icons/IconRedo.vue'
+import IconUndo from '@/icons/IconUndo.vue'
 
 const props = defineProps<{
   modelValue: string
@@ -42,6 +45,7 @@ const editor = useEditor({
     Document,
     Paragraph,
     Text,
+    History,
     Placeholder.configure({
       placeholder: props.placeholder,
     }),
@@ -155,6 +159,13 @@ watch(
         @click.prevent="editor?.chain().focus().toggleCodeBlock().run()"
       >
         <IconFormatCodeBlock />
+      </button>
+      <div class="separator" />
+      <button class="icon" :disabled="!editor.can().undo()" @click.prevent="editor?.chain().focus().undo().run()">
+        <IconUndo />
+      </button>
+      <button class="icon" :disabled="!editor.can().redo()" @click.prevent="editor?.chain().focus().redo().run()">
+        <IconRedo />
       </button>
     </div>
     <EditorContent :editor="editor" />
