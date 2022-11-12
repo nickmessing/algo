@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { Bold } from '@tiptap/extension-bold'
 import { BulletList } from '@tiptap/extension-bullet-list'
+import { Code } from '@tiptap/extension-code'
+import { CodeBlock } from '@tiptap/extension-code-block'
 import { Document } from '@tiptap/extension-document'
 import { Heading } from '@tiptap/extension-heading'
 import { Italic } from '@tiptap/extension-italic'
@@ -16,6 +18,8 @@ import { watch } from 'vue'
 
 import IconFormatBold from '@/icons/IconFormatBold.vue'
 import IconFormatBulletedList from '@/icons/IconFormatBulletedList.vue'
+import IconFormatCode from '@/icons/IconFormatCode.vue'
+import IconFormatCodeBlock from '@/icons/IconFormatCodeBlock.vue'
 import IconFormatItalic from '@/icons/IconFormatItalic.vue'
 import IconFormatSubscript from '@/icons/IconFormatSubscript.vue'
 import IconFormatSuperscript from '@/icons/IconFormatSuperscript.vue'
@@ -51,6 +55,8 @@ const editor = useEditor({
     Underline,
     Subscript,
     Superscript,
+    Code,
+    CodeBlock,
   ],
   onUpdate({ editor }) {
     emit('update:modelValue', editor.getHTML())
@@ -134,6 +140,21 @@ watch(
         @click.prevent="editor?.chain().focus().toggleSuperscript().run()"
       >
         <IconFormatSuperscript />
+      </button>
+      <div class="separator" />
+      <button
+        class="icon"
+        :class="{ active: editor.isActive('code') }"
+        @click.prevent="editor?.chain().focus().toggleCode().run()"
+      >
+        <IconFormatCode />
+      </button>
+      <button
+        class="icon"
+        :class="{ active: editor.isActive('codeBlock') }"
+        @click.prevent="editor?.chain().focus().toggleCodeBlock().run()"
+      >
+        <IconFormatCodeBlock />
       </button>
     </div>
     <EditorContent :editor="editor" />

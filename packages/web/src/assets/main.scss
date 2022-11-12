@@ -77,6 +77,29 @@ body {
     font-size: 0.8em;
     vertical-align: super;
   }
+
+  pre {
+    padding: 8px;
+    background-color: var(--color-gray-91);
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-word;
+
+    code {
+      background-color: transparent;
+      padding: 0;
+      border-radius: 0;
+    }
+  }
+
+  code {
+    background-color: var(--color-gray-91);
+    border-radius: 4px;
+    padding: 4px;
+    font-size: 14px;
+  }
 }
 
 .example-content,
