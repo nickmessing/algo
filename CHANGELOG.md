@@ -1,3 +1,9 @@
+## <small>1.0.7 (2022-11-12)</small>
+
+* fix(web): aplică font monospațiat pentru cod ([345fa8b](https://github.com/nickmessing/algo/commit/345fa8b))
+
+
+
 ## <small>1.0.6 (2022-11-12)</small>
 
 * chore(web): refactor la editor ([bb81ebe](https://github.com/nickmessing/algo/commit/bb81ebe))
