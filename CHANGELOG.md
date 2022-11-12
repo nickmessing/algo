@@ -1,3 +1,15 @@
+## <small>1.0.4 (2022-11-12)</small>
+
+* feat(db): adaugă limita de memorie pentru stivă ([94239e4](https://github.com/nickmessing/algo/commit/94239e4))
+* feat(graphql-web): cere limita de stivă ([755b5b4](https://github.com/nickmessing/algo/commit/755b5b4))
+* feat(graphql): adaugă limita de memorie pentru stivă ([abe8fca](https://github.com/nickmessing/algo/commit/abe8fca))
+* feat(server): implementează limita de stivă ([9344dc0](https://github.com/nickmessing/algo/commit/9344dc0))
+* feat(web): implementează limita de stivă ([dc92705](https://github.com/nickmessing/algo/commit/dc92705))
+* chore(graphql): generează tipurile de date ([1cb9b84](https://github.com/nickmessing/algo/commit/1cb9b84))
+* fix(graphql-server): face limita de stivă necesară ([2c61ba8](https://github.com/nickmessing/algo/commit/2c61ba8))
+
+
+
 ## <small>1.0.3 (2022-11-11)</small>
 
 * chore(changelog): curățare changelog ([72f19dc](https://github.com/nickmessing/algo/commit/72f19dc))
