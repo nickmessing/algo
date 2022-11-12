@@ -61,6 +61,7 @@ export type CreateTaskInput = {
   languageId: Scalars['Int']
   memoryLimit: Scalars['Int']
   solutionSource: Scalars['String']
+  stackMemoryLimit: Scalars['Int']
   tags: Array<Scalars['String']>
   timeLimit: Scalars['Int']
   title: Scalars['String']
@@ -218,6 +219,7 @@ export type Task = BaseModel & {
   id: Scalars['ID']
   isActive: Scalars['Boolean']
   memoryLimit: Scalars['Int']
+  stackMemoryLimit: Scalars['Int']
   tags: Array<Scalars['String']>
   timeLimit: Scalars['Int']
   title: Scalars['String']
@@ -561,6 +563,7 @@ export type TaskResolvers<ContextType = ApolloContext, ParentType = ResolversPar
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>
   isActive?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>
   memoryLimit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
+  stackMemoryLimit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
   tags?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>
   timeLimit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>

@@ -60,6 +60,7 @@ export type CreateTaskInput = {
   languageId: Scalars['Int']
   memoryLimit: Scalars['Int']
   solutionSource: Scalars['String']
+  stackMemoryLimit: Scalars['Int']
   tags: Array<Scalars['String']>
   timeLimit: Scalars['Int']
   title: Scalars['String']
@@ -217,6 +218,7 @@ export type Task = BaseModel & {
   id: Scalars['ID']
   isActive: Scalars['Boolean']
   memoryLimit: Scalars['Int']
+  stackMemoryLimit: Scalars['Int']
   tags: Array<Scalars['String']>
   timeLimit: Scalars['Int']
   title: Scalars['String']
@@ -336,6 +338,7 @@ export type FullTaskFragment = {
   description: string
   timeLimit: number
   memoryLimit: number
+  stackMemoryLimit: number
   isActive: boolean
   id: string
   title: string
@@ -369,6 +372,7 @@ export type SingleTaskQuery = {
     description: string
     timeLimit: number
     memoryLimit: number
+    stackMemoryLimit: number
     isActive: boolean
     id: string
     title: string
@@ -578,6 +582,7 @@ export const FullTaskFragmentDoc = gql`
     description
     timeLimit
     memoryLimit
+    stackMemoryLimit
     isActive
     examples {
       id
